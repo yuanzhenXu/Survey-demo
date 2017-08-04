@@ -1,25 +1,29 @@
-- form_for @survey do |f|
+= form_for @survey do |f|
   - if @survey.errors.any?
-    #error_explanation
+    .error_messages
       h2
         = pluralize(@survey.errors.count, "error")
-        | prohibited
-        | this survey from being saved:
+        | prohibited this survey from being saved:
       ul
         - @survey.errors.full_messages.each do |msg|
           li= msg
-  p
+  .field
     = f.label :name
+    br
     = f.text_field :name
-  - f.fields_for :questions do |builder|
-      = render 'question_fields', :f => builder
-  p = f.submit "Submit"
-/- form_for @survey do |f|
-/  = f.error_messages
-/  p
-/    = f.label :name
-/    br
-/    = f.text_field :name
-/  - f.fields_for :questions do |builder|
-/    = render "question_fields", :f => builder
-/  p= f.submit "Submit"
+  = f.fields_for :questions do |b|
+    fieldset
+      = b.label :title, "Question"
+      br
+      = b.text_area :title
+      br
+      = b.check_box :_destroy
+      = b.label :_destroy, "Remove Question"
+      = b.fields_for :answers do |r|
+        fieldset
+          = r.label :content, "Answer"
+          = r.text_field :content
+          = r.hidden_field :_destroy
+          = link_to "remove", '#', class: "remove_fields"
+  .actions
+    = f.submit

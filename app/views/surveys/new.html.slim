@@ -1,27 +1,57 @@
-title "New Survey"
-= form_for @survey do |f|
-  - if @survey.errors.any?
-    #error_explanation
-      h2
-        = pluralize(@survey.errors.count, "error")
-        | prohibited
-        | this survey from being saved:
-      ul
-        - @survey.errors.full_messages.each do |msg|
-          li= msg
-  p
-    = f.label :name
-    br
-    = f.text_field :name
-/  /= f.fields_for :questions do |builder|
-/  /  p
-/  /    = f.label :title, "Question"
-/  /    br
-/  /    = f.text_area :title, :rows => 3
-/  /    br
-/  /    = f.check_box :_destroy
-/  /    = f.label :_destroy, "Remove Question"
-/  /  = render 'question_fields', :f => builder
-/  p = f.submit "Submit"
-= render :partial => 'form'
+h1 New Survey
+= render 'form'
+/= form_for @survey do |f|
+/  - if @survey.errors.any?
+/    #error_explanation
+/      h2
+/        = pluralize(@survey.errors.count, "error")
+/        | prohibited
+/        | this survey from being saved:
+/      ul
+/        - @survey.errors.full_messages.each do |msg|
+/          li= msg
+/  p
+/    = f.label :name
+/    br
+/    = f.text_field :name
+//  /= f.fields_for :questions do |builder|
+//  /  p
+//  /    = f.label :title, "Question"
+//  /    br
+//  /    = f.text_area :title, :rows => 3
+//  /    br
+//  /    = f.check_box :_destroy
+//  /    = f.label :_destroy, "Remove Question"
+//  /  = render 'question_fields', :f => builder
+//  p = f.submit "Submit"
+/= render :partial => 'form'
 p =link_to "Back list", surveys_path
+/= form_for @survey do |f|
+/  - if @survey.errors.any?
+/    .error_messages
+/      h2
+/        = pluralize(@survey.errors.count, "error")
+/        | prohibited this survey from being saved:
+/      ul
+/        - @survey.errors.full_messages.each do |msg|
+/          li= msg
+/  .field
+/    = f.label :name
+/    br
+/    = f.text_field :name
+/  = f.fields_for :questions do |b|
+/    fieldset
+/      = b.label :title, "Question"
+/      br
+/      = b.text_area :title
+/      br
+/      = b.check_box :_destroy
+/      = b.label :_destroy, "Remove Question"
+/      = b.fields_for :answers do |r|
+/        fieldset
+/          = r.label :content, "Answer"
+/          = r.text_field :content
+/          = r.hidden_field :_destroy
+/          = link_to "remove", '#', class: "remove_fields"
+/  .actions
+/    = f.submit
