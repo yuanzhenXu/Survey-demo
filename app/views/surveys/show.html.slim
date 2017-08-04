@@ -1,10 +1,8 @@
-title "Survey"
-
 h1= @survey.name
 ol.questions
   - @survey.questions.each do |question|
     li
-      = question.content
+      = question.title
       ol.answers
         - question.answers.each do |answer|
           li= answer.content

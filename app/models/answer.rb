@@ -1,6 +1,6 @@
 class Answer < ApplicationRecord
-  # attr_accessor :content, :question_id
   belongs_to :question
+  # attr_accessible :content, :question_id
 
   # has_many :useranswers
 end
