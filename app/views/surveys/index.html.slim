@@ -1,0 +1,15 @@
+h1 Total
+= @surveys.count
+table
+  tr
+    th Name
+    th 1
+    th 2
+    th 3
+  - for survey in @surveys
+    tr
+      td= h survey.name
+      td= link_to "Show", survey
+      td= link_to "Edit", edit_survey_path(survey)
+      td= link_to "Destroy", survey, :confirm => 'Are you sure?', :method => :delete
+p= link_to "New Survey", new_survey_path

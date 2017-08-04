@@ -1,0 +1,25 @@
+- form_for @survey do |f|
+  - if @survey.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@survey.errors.count, "error")
+        | prohibited
+        | this survey from being saved:
+      ul
+        - @survey.errors.full_messages.each do |msg|
+          li= msg
+  p
+    = f.label :name
+    = f.text_field :name
+  - f.fields_for :questions do |builder|
+      = render 'question_fields', :f => builder
+  p = f.submit "Submit"
+/- form_for @survey do |f|
+/  = f.error_messages
+/  p
+/    = f.label :name
+/    br
+/    = f.text_field :name
+/  - f.fields_for :questions do |builder|
+/    = render "question_fields", :f => builder
+/  p= f.submit "Submit"
