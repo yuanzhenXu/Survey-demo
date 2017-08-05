@@ -8,3 +8,6 @@ fieldset
   = f.fields_for :answers do |builder|
     = render 'answer_fields', f: builder
   = link_to_add_fields "Add Answer", f, :answers
+  = f.fields_for :options do |builder|
+    = render 'surveys/option_fields', f: builder
+  = link_to_add_fields "Add Option", f, :options

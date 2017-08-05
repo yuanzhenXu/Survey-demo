@@ -13,7 +13,8 @@ class SurveysController < ApplicationController
     @survey = Survey.new
     3.times do
       question = @survey.questions.build
-      4.times { question.answers.build }
+      4.times { question.answers.build}
+      2.times { question.options.build}
     end
   end
 
@@ -53,7 +54,7 @@ class SurveysController < ApplicationController
   def survey_params
     params.require(:survey).permit(:name,
        questions_attributes: [:id, :title, :survey_id,
-         answers_attributes:[:id, :content,:question_id]])
+         answers_attributes:[:id, :content, :question_id], options_attributes: [:id, :content, :question_id]])
   end
 
   def fetch_survey

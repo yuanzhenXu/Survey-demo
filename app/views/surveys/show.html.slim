@@ -8,4 +8,6 @@ ol.questions
           li= answer.content
 = link_to 'Edit', edit_survey_path(@survey)
 |
+= link_to 'Delete', survey_path(@survey), method: :delete, date: { confirm: 'are you sure?' }
+|
 = link_to 'Back to Surveys', surveys_path
